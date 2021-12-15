@@ -1,0 +1,451 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.1
+-- Dumped by pg_dump version 14.1
+
+-- Started on 2021-12-15 10:24:56
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- TOC entry 210 (class 1259 OID 16400)
+-- Name: User; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."User" (
+    id bigint NOT NULL,
+    "Full_Name" "char" NOT NULL,
+    email "char" NOT NULL,
+    password "char" NOT NULL
+);
+
+
+ALTER TABLE public."User" OWNER TO postgres;
+
+--
+-- TOC entry 213 (class 1259 OID 16415)
+-- Name: Chef_De_Projet; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Chef_De_Projet" (
+    matricule "char" NOT NULL,
+    salaire bigint NOT NULL,
+    "rénumération" bigint NOT NULL
+)
+INHERITS (public."User");
+
+
+ALTER TABLE public."Chef_De_Projet" OWNER TO postgres;
+
+--
+-- TOC entry 212 (class 1259 OID 16412)
+-- Name: Client; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Client" (
+    "activité" "char" NOT NULL,
+    matricule "char" NOT NULL,
+    "fax " "char" NOT NULL
+)
+INHERITS (public."User");
+
+
+ALTER TABLE public."Client" OWNER TO postgres;
+
+--
+-- TOC entry 214 (class 1259 OID 16418)
+-- Name: Employes; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Employes" (
+    matricule "char" NOT NULL,
+    "rénumération" bigint NOT NULL,
+    salaire bigint NOT NULL
+)
+INHERITS (public."User");
+
+
+ALTER TABLE public."Employes" OWNER TO postgres;
+
+--
+-- TOC entry 218 (class 1259 OID 16438)
+-- Name: Etat_D_Activite; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Etat_D_Activite" (
+    id bigint NOT NULL,
+    "FirstName" "char",
+    "LastName" "char",
+    bio "char",
+    "PhotoProfil" "char",
+    "Tel" bigint,
+    "adresse " "char"
+);
+
+
+ALTER TABLE public."Etat_D_Activite" OWNER TO postgres;
+
+--
+-- TOC entry 219 (class 1259 OID 16454)
+-- Name: Etat_D_Avancement; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Etat_D_Avancement" (
+    id bigint NOT NULL
+);
+
+
+ALTER TABLE public."Etat_D_Avancement" OWNER TO postgres;
+
+--
+-- TOC entry 220 (class 1259 OID 16470)
+-- Name: Materiel; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Materiel" (
+    id bigint NOT NULL,
+    "Name" "char",
+    "Numéro" bigint,
+    type "char"
+);
+
+
+ALTER TABLE public."Materiel" OWNER TO postgres;
+
+--
+-- TOC entry 211 (class 1259 OID 16405)
+-- Name: Projet; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Projet" (
+    "id " bigint NOT NULL,
+    "Nom" "char" NOT NULL,
+    "Date_Debut" timestamp(6) with time zone[] NOT NULL,
+    "Date_Fin" timestamp(6) with time zone[] NOT NULL,
+    "Date_échéance" timestamp(6) with time zone[] NOT NULL,
+    "Libellé" "char" NOT NULL,
+    "Numéro" bigint NOT NULL,
+    "thème" "char" NOT NULL
+);
+
+
+ALTER TABLE public."Projet" OWNER TO postgres;
+
+--
+-- TOC entry 215 (class 1259 OID 16421)
+-- Name: Salarie; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Salarie" (
+)
+INHERITS (public."Employes");
+
+
+ALTER TABLE public."Salarie" OWNER TO postgres;
+
+--
+-- TOC entry 217 (class 1259 OID 16427)
+-- Name: Taches; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Taches" (
+    "id " bigint NOT NULL,
+    "Nom" "char",
+    cout "char"
+);
+
+
+ALTER TABLE public."Taches" OWNER TO postgres;
+
+--
+-- TOC entry 216 (class 1259 OID 16424)
+-- Name: Vendeur; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public."Vendeur" (
+)
+INHERITS (public."Employes");
+
+
+ALTER TABLE public."Vendeur" OWNER TO postgres;
+
+--
+-- TOC entry 209 (class 1259 OID 16395)
+-- Name: divisions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.divisions (
+    id integer,
+    nom character varying,
+    "numéro" integer,
+    ca double precision,
+    adresse character varying
+);
+
+
+ALTER TABLE public.divisions OWNER TO postgres;
+
+--
+-- TOC entry 3370 (class 0 OID 16415)
+-- Dependencies: 213
+-- Data for Name: Chef_De_Projet; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Chef_De_Projet" (id, "Full_Name", email, password, matricule, salaire, "rénumération") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3369 (class 0 OID 16412)
+-- Dependencies: 212
+-- Data for Name: Client; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Client" (id, "Full_Name", email, password, "activité", matricule, "fax ") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3371 (class 0 OID 16418)
+-- Dependencies: 214
+-- Data for Name: Employes; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Employes" (id, "Full_Name", email, password, matricule, "rénumération", salaire) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3375 (class 0 OID 16438)
+-- Dependencies: 218
+-- Data for Name: Etat_D_Activite; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Etat_D_Activite" (id, "FirstName", "LastName", bio, "PhotoProfil", "Tel", "adresse ") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3376 (class 0 OID 16454)
+-- Dependencies: 219
+-- Data for Name: Etat_D_Avancement; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Etat_D_Avancement" (id) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3377 (class 0 OID 16470)
+-- Dependencies: 220
+-- Data for Name: Materiel; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Materiel" (id, "Name", "Numéro", type) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3368 (class 0 OID 16405)
+-- Dependencies: 211
+-- Data for Name: Projet; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Projet" ("id ", "Nom", "Date_Debut", "Date_Fin", "Date_échéance", "Libellé", "Numéro", "thème") FROM stdin;
+\.
+
+
+--
+-- TOC entry 3372 (class 0 OID 16421)
+-- Dependencies: 215
+-- Data for Name: Salarie; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Salarie" (id, "Full_Name", email, password, matricule, "rénumération", salaire) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3374 (class 0 OID 16427)
+-- Dependencies: 217
+-- Data for Name: Taches; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Taches" ("id ", "Nom", cout) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3367 (class 0 OID 16400)
+-- Dependencies: 210
+-- Data for Name: User; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."User" (id, "Full_Name", email, password) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3373 (class 0 OID 16424)
+-- Dependencies: 216
+-- Data for Name: Vendeur; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public."Vendeur" (id, "Full_Name", email, password, matricule, "rénumération", salaire) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3366 (class 0 OID 16395)
+-- Dependencies: 209
+-- Data for Name: divisions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.divisions (id, nom, "numéro", ca, adresse) FROM stdin;
+\.
+
+
+--
+-- TOC entry 3215 (class 2606 OID 16442)
+-- Name: Etat_D_Activite Etat_D_Activite_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Etat_D_Activite"
+    ADD CONSTRAINT "Etat_D_Activite_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3218 (class 2606 OID 16458)
+-- Name: Etat_D_Avancement Etat_D_Avancement_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Etat_D_Avancement"
+    ADD CONSTRAINT "Etat_D_Avancement_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3221 (class 2606 OID 16474)
+-- Name: Materiel Materiel_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Materiel"
+    ADD CONSTRAINT "Materiel_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3210 (class 2606 OID 16411)
+-- Name: Projet Projet_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Projet"
+    ADD CONSTRAINT "Projet_pkey" PRIMARY KEY ("id ");
+
+
+--
+-- TOC entry 3212 (class 2606 OID 16431)
+-- Name: Taches Taches_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Taches"
+    ADD CONSTRAINT "Taches_pkey" PRIMARY KEY ("id ");
+
+
+--
+-- TOC entry 3208 (class 2606 OID 16404)
+-- Name: User User_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."User"
+    ADD CONSTRAINT "User_pkey" PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3213 (class 1259 OID 16437)
+-- Name: fki_Project_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "fki_Project_id" ON public."Taches" USING btree ("id ");
+
+
+--
+-- TOC entry 3219 (class 1259 OID 16469)
+-- Name: fki_Taches_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "fki_Taches_id" ON public."Etat_D_Avancement" USING btree (id);
+
+
+--
+-- TOC entry 3216 (class 1259 OID 16448)
+-- Name: fki_User_id; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX "fki_User_id" ON public."Etat_D_Activite" USING btree (id);
+
+
+--
+-- TOC entry 3223 (class 2606 OID 16432)
+-- Name: Taches Project_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Taches"
+    ADD CONSTRAINT "Project_id" FOREIGN KEY ("id ") REFERENCES public."Projet"("id ") NOT VALID;
+
+
+--
+-- TOC entry 3225 (class 2606 OID 16459)
+-- Name: Etat_D_Avancement Project_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Etat_D_Avancement"
+    ADD CONSTRAINT "Project_id" FOREIGN KEY (id) REFERENCES public."Projet"("id ") NOT VALID;
+
+
+--
+-- TOC entry 3226 (class 2606 OID 16464)
+-- Name: Etat_D_Avancement Taches_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Etat_D_Avancement"
+    ADD CONSTRAINT "Taches_id" FOREIGN KEY (id) REFERENCES public."Taches"("id ") NOT VALID;
+
+
+--
+-- TOC entry 3224 (class 2606 OID 16443)
+-- Name: Etat_D_Activite User_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public."Etat_D_Activite"
+    ADD CONSTRAINT "User_id" FOREIGN KEY (id) REFERENCES public."User"(id) NOT VALID;
+
+
+--
+-- TOC entry 3222 (class 2606 OID 16449)
+-- Name: divisions User_id; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.divisions
+    ADD CONSTRAINT "User_id" FOREIGN KEY (id) REFERENCES public."User"(id) NOT VALID;
+
+
+-- Completed on 2021-12-15 10:24:57
+
+--
+-- PostgreSQL database dump complete
+--
+
